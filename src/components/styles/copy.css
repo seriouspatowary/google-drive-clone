@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        /* White background */
+        --foreground: 0 0% 0%;
+        /* Black text */
+
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 0%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 0%;
+
+        --primary: 0 0% 0%;
+        /* Black button */
+        --primary-foreground: 0 0% 100%;
+        /* White text on black */
+
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 0 0% 0%;
+
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 0 0% 0%;
+
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 0 0% 0%;
+        /* Optional: ring black if needed */
+
+        --radius: 1rem;
+    }
+
+    .dark {
+        /* Optional dark theme */
+        --background: 0 0% 10%;
+        --foreground: 0 0% 98%;
+        --primary: 0 0% 100%;
+        --primary-foreground: 0 0% 0%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    h1 {
+        @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+    }
+
+    h2 {
+        @apply scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+    }
+
+    h3 {
+        @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+    }
+
+    h4 {
+        @apply scroll-m-20 text-xl font-semibold tracking-tight;
+    }
+
+    p {
+        @apply leading-7 [&:not(:first-child)]:mt-6;
+    }
+
+    blockquote {
+        @apply mt-6 border-l-2 pl-6 italic;
+    }
+
+    code {
+        @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+    }
+
+    .input {
+        @apply border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent shadow-none !important;
+    }
+
+    .link {
+        @apply text-blue-500 underline-offset-4 hover:underline;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-accent rounded-lg;
+    }
+}

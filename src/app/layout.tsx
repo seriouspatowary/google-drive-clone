@@ -1,9 +1,11 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster as Toast } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import QueryProvider from "@/context/query-provider";
 
 
 const outfit = Outfit({
@@ -25,9 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(`antialiased`, outfit.variable)}>
-          {children}
-          <Toast/>
-          <Sonner/>
+        <QueryProvider>
+          
+                  {children}
+                  <Toast/>
+                   <Sonner />
+        </QueryProvider>
+         
         
       </body>
     </html>

@@ -4,7 +4,6 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import client from "./db";
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from "../env";
 import { createAuthMiddleware } from "better-auth/api";
-import { sendMessage } from "@/lib/notification"
 import db from "../database/db";
 import { Subscription } from "../database/schema/subscription.model";
 import { ObjectId } from "mongodb";
@@ -13,7 +12,7 @@ const dbClient = client.db();
 
  
 export const auth = betterAuth({
-      database: mongodbAdapter(dbClient),
+    database: mongodbAdapter(dbClient),
 
      socialProviders: {
         google: { 
@@ -53,7 +52,7 @@ export const auth = betterAuth({
                     )
                         
                 } catch (error) {
-                    console.log("error in creating subsciption beforef hook",error)
+                    console.log("error in creating subsciption before hook",error)
                     throw ctx.redirect("/")
  
                 }
