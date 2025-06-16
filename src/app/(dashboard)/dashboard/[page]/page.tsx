@@ -1,3 +1,6 @@
+import { generatePageKey } from "@/lib/utils";
+import PageFiles from "./_components/page-files";
+
 interface Props {
   params: Promise<{
     page:
@@ -10,11 +13,20 @@ interface Props {
   }>;
 }
 
-const page = async({ params }: Props) => {
-    const page = (await params).page;
-        return (
-            <div>{page}</div>
-        )
+const page = async ({ params }: Props) => {
+  const page = (await params).page;
+  
+  const key = generatePageKey(page);
+
+  return (
+    <>
+      <h1 className="capitalize">{page}</h1>
+      <br />
+      
+      <PageFiles page={key}/>
+    
+    </>
+  )
 }
 
 export default page

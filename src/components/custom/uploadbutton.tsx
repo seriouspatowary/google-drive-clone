@@ -3,11 +3,9 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Button } from '../ui/button'
 import { RiFileAddFill } from '@remixicon/react'
-import { usePathname } from 'next/navigation';
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import { toast } from 'sonner';
 import axios from 'axios';
-import { Subscription } from '@/lib/database/schema/subscription.model';
 import { File } from '@/lib/database/schema/file.model';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { P } from './p';
