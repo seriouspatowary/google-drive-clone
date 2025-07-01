@@ -1,5 +1,6 @@
+
 import { IFile } from '@/lib/database/schema/file.model';
-import { cn, formatFileSize } from '@/lib/utils';
+import { cn, dynamicDownload, formatFileSize } from '@/lib/utils';
 import {
   Card,
   CardContent,
@@ -9,9 +10,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import FileMenu from './menu';
 import { P } from '../p';
 import { format } from 'date-fns';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { generateUrl } from '@/actions/file.action';
 
 
 const FileCard = ({ file }: { file: IFile }) => {
+
+  const [islinkProgress, setLinkProgress] = useState(false);
   
   const { name, size, createdAt, userInfo, category } = file;
 
@@ -23,7 +29,7 @@ const FileCard = ({ file }: { file: IFile }) => {
   <Card className='w-full max-h-60 border-none shadow-none drop-shadow-xl'>
   <CardHeader>
         <div className='flex items-center gap-4 justify-between'>
-          <Avatar>
+          <Avatar className='size-20 rounded-none'>
             <AvatarImage src={`/${category}.png`} />
             <AvatarFallback>{name.slice(0,2)}</AvatarFallback>
           </Avatar>
@@ -35,12 +41,30 @@ const FileCard = ({ file }: { file: IFile }) => {
         </div>
         
   </CardHeader>
-  <CardContent>
+  <CardContent className='space-y-2'>
         <P size="large" weight="bold" className={cn(category === "image" && "cursor-pointer")}
-          onClick={() => {
+          onClick={async() => {
             if (category === "image") {
-              console.log("image");
-           }
+              const { data, status } = await generateUrl(file.cid)
+              
+              console.log(data, status)
+              
+              if (status !== 201) {
+                      toast(`${data}`, {
+                          description:data
+                      })
+                      setLinkProgress(false);
+
+                      return
+               }
+
+              setLinkProgress(false)
+              
+              dynamicDownload(data, file.name)
+            }
+            
+            
+
         }}
         >
           {requiredName}
